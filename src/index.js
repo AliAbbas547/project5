@@ -3,12 +3,19 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const route = require('./route/routes.js');
 const app=express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const url ="mongodb+srv://Pratham_Panchariya:shree79766@cluster0.yd3rrae.mongodb.net/Project-5";
 mongoose.set('strictQuery', true);
 
 app.use(multer().any());
 app.use(express.json());
+app.use(
+    function(req,res,next){
+        res.setHeader('Access-Control-Allow-Origin','*')
+        next()
+        
+    }
+)
 
 mongoose.connect(url)
 .then(() => console.log("Mongoose is Connected"))
